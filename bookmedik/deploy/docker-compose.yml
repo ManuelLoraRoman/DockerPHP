@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+
+  db:
+    container_name: servidor_mysql
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_DATABASE: bookmedik
+      MYSQL_USER: bookmedik
+      MYSQL_PASSWORD: bookmedik
+      MYSQL_ROOT_PASSWORD: bookmedik
+    volumes:
+      - /media/manuel/Datos/Docker/bookmedik/volmaria:/var/lib/mysql
+
+
+  bookmedik:
+    container_name: servidor_bookmedik
+    image: manuellora/bookmedik:v1
+    restart: always
+    environment:
+      USER: bookmedik
+      PASSWORD: bookmedik
+      HOST: db
+      DB: bookmedik
+    ports:
+      - 80:8080
+    volumes:
+      - /media/manuel/Datos/Docker/bookmedik/volapache:/var/log/apache2
+

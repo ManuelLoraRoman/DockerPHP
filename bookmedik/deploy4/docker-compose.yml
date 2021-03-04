@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+
+  drupal:
+    image: manuellora/drupal:v1
+    container_name: drupal
+    restart: always
+    ports:
+      - 80:80
+    environment:
+      USER: drupal
+      PASSWORD: drupal
+      HOST: db
+      DB: drupal
+    volumes:
+      - /media/manuel/Datos/Docker/bookmedik/voldrupal:/var/log/apache2
+  
+  db:
+    image: mariadb
+    container_name: servidor_mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
+      MYSQL_ROOT_PASSWORD: drupal
+    volumes:
+      - /media/manuel/Datos/Docker/bookmedik/volmaria4:/var/lib/mysql
+
